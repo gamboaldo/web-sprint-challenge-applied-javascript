@@ -9,12 +9,7 @@ const Card = (article) => {
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
   //
-  const artCard = document.createElement("div");
-  const headline = document.createElement("div");
-  const author = document.createElement("div");
-  const imgContain = document.createElement("div");
-  const authorImg = document.createElement("img");
-  const spanAuthor = document.createElement("span");
+
   // <div class="card">
   //   <div class="headline">{ headline }</div>
   //   <div class="author">
@@ -24,14 +19,20 @@ const Card = (article) => {
   //     <span>By { authorName }</span>
   //   </div>
   // </div>
-  artCard.classList.add("card");
-  headline.classList.add("headline");
-  author.classList.add("author");
-  imgContain.classList.add("img-container");
 
+  const artCard = document.createElement("div");
+  artCard.classList.add("card");
+  const headline = document.createElement("div");
+  headline.classList.add("headline");
   headline.textContent = article.headline;
-  spanAuthor.textContent = article.authorName;
+  const author = document.createElement("div");
+  author.classList.add("author");
+  const imgContain = document.createElement("div");
+  imgContain.classList.add("img-container");
+  const authorImg = document.createElement("img");
   authorImg.src = article.authorPhoto;
+  const spanAuthor = document.createElement("span");
+  spanAuthor.textContent = article.authorName;
 
   artCard.appendChild(headline);
   artCard.appendChild(author);
@@ -55,7 +56,10 @@ const cardAppender = (selector) => {
   // However, the articles do not come organized in a single, neat array. Inspect the response closely!
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
-  //
+  //this was kinda hard
+
+  // console.log(axios.get("https://lambda-times-api.herokuapp.com/articles"));
+
   axios
     .get("https://lambda-times-api.herokuapp.com/articles")
     .then((response) => {
