@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -7,6 +9,12 @@ const Card = (article) => {
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
   //
+  const artCard = document.createElement("div");
+  const headline = document.createElement("div");
+  const author = document.createElement("div");
+  const imgContain = document.createElement("div");
+  const authorImg = document.createElement("img");
+  const spanAuthor = document.createElement("span");
   // <div class="card">
   //   <div class="headline">{ headline }</div>
   //   <div class="author">
@@ -16,8 +24,28 @@ const Card = (article) => {
   //     <span>By { authorName }</span>
   //   </div>
   // </div>
+  artCard.classList.add("card");
+  headline.classList.add("headline");
+  author.classList.add("author");
+  imgContain.classList.add("img-container");
+
+  headline.textContent = article.headline;
+  spanAuthor.textContent = article.authorName;
+  authorImg.src = article.authorPhoto;
+
+  artCard.appendChild(headline);
+  artCard.appendChild(author);
+  author.appendChild(imgContain);
+  imgContain.appendChild(authorImg);
+  author.appendChild(spanAuthor);
+
+  artCard.addEventListener("click", (event) => {
+    console.log(article.headline);
+  });
+
+  return artCard;
   //
-}
+};
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -28,6 +56,34 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
+  axios
+    .get("https://lambda-times-api.herokuapp.com/articles")
+    .then((response) => {
+      // creating a card from each and every article obj
+      const bsArt = response.data.articles.bootstrap;
+      bsArt.forEach((bsArt) => {
+        document.querySelector(selector).appendChild(Card(bsArt));
+      });
+      const jsArt = response.data.articles.javascript;
+      jsArt.forEach((jsArt) => {
+        document.querySelector(selector).appendChild(Card(jsArt));
+      });
+      const jqueryArt = response.data.articles.jquery;
+      jqueryArt.forEach((jqueryArt) => {
+        document.querySelector(selector).appendChild(Card(jqueryArt));
+      });
+      const nodeArt = response.data.articles.node;
+      nodeArt.forEach((nodeArt) => {
+        document.querySelector(selector).appendChild(Card(nodeArt));
+      });
+      const techArt = response.data.articles.technology;
+      techArt.forEach((techArt) => {
+        document.querySelector(selector).appendChild(Card(techArt));
+      });
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+};
 
-export { Card, cardAppender }
+export { Card, cardAppender };
