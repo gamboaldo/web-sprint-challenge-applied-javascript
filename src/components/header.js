@@ -6,12 +6,6 @@ const Header = (title, date, temp) => {
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   //
 
-  //  <div class="header">
-  //    <span class="date">{ date }</span>
-  //    <h1>{ title }</h1>
-  //    <span class="temp">{ temp }</span>
-  //  </div>
-
   const head = document.createElement("div");
   head.classList.add("header");
   const dateSpan = document.createElement("span");
@@ -23,6 +17,11 @@ const Header = (title, date, temp) => {
   tempSpan.classList.add("temp");
   tempSpan.textContent = temp;
 
+  //  <div class="header">
+  //    <span class="date">{ date }</span>
+  //    <h1>{ title }</h1>
+  //    <span class="temp">{ temp }</span>
+  //  </div>
   //
   head.appendChild(dateSpan);
   head.appendChild(titleH1);
@@ -34,12 +33,12 @@ const Header = (title, date, temp) => {
 const headerAppender = (selector) => {
   // TASK 2
   // ---------------------
+  const headerCont = document.querySelector(selector);
+  headerCont.appendChild(Header("Lambda Times", "February 12th, 2050", "60"));
   // Implement this function taking a css selector as its only argument.
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
-  const headerCont = document.querySelector(selector);
-  headerCont.appendChild(Header("Lambda Times", "February 12th, 2050", "60"));
 };
 
 export { Header, headerAppender };

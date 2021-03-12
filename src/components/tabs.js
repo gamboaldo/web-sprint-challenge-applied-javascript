@@ -12,11 +12,6 @@ const Tabs = (topics) => {
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   //
 
-  // <div class="topics">
-  //   <div class="tab">javascript</div>
-  //   <div class="tab">bootstrap</div>
-  //   <div class="tab">technology</div>
-  // </div>
   const topicsDiv = document.createElement("div");
   topicsDiv.classList.add("topics");
 
@@ -27,6 +22,12 @@ const Tabs = (topics) => {
     topicsDiv.appendChild(tabDiv);
     tabsCont.appendChild(topicsDiv);
   });
+
+  // <div class="topics">
+  //   <div class="tab">javascript</div>
+  //   <div class="tab">bootstrap</div>
+  //   <div class="tab">technology</div>
+  // </div>
 
   return topicsDiv;
   //
